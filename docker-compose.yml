@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "5001:5001"
+    volumes:
+      - .:/gateway
+    networks:
+      - fitadmin_network
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - fitadmin_network
+    restart: unless-stopped
+
+networks:
+  fitadmin_network:
+    external: true
+
+

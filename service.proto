@@ -1,0 +1,148 @@
+syntax = "proto3";
+
+// =====================================================================
+// Authenticate Service
+// =====================================================================
+
+message AuthenticateUserRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message AuthenticateUserResponse {
+    bool success = 1;
+}
+
+service AuthService {
+    rpc AuthenticateUser (AuthenticateUserRequest) returns (AuthenticateUserResponse);
+}
+
+// =====================================================================
+// GET ALL Students Service
+// =====================================================================
+
+message StudentDataRequest {}
+
+message Student {
+    int32 id = 1;
+    string name = 2;
+    string gender_id = 3;
+    string birthday = 4;
+    string email = 5;
+    string phone = 6;
+    string state_id = 7;
+    string city = 8;
+    string neighborhood = 9;
+    string address = 10;
+    string number = 11;
+    int32 plan_id = 12;
+    int32 payment_id = 13;
+}
+
+message StudentDataResponse {
+    repeated Student student = 1;
+}
+
+service StudentService {
+    rpc GetStudentData (StudentDataRequest) returns (StudentDataResponse);
+}
+
+// =====================================================================
+// GET ALL States Service
+// =====================================================================
+
+message StatesDataRequest {}
+
+message State {
+    int32 id = 1;
+    string name = 2;
+    string abbreviation = 3;
+}
+
+message StatesDataResponse {
+    repeated State state = 1;
+}
+
+service StateService {
+    rpc GetStateData (StatesDataRequest) returns (StatesDataResponse);
+}
+
+// =====================================================================
+// GET ALL Genders Service
+// =====================================================================
+
+message GendersDataRequest{}
+
+message Gender {
+    int32 id = 1;
+    string name = 2;
+}
+
+message GendersDataResponse {
+    repeated Gender gender = 1;
+}
+
+service GenderService {
+    rpc GetGenderData (GendersDataRequest) returns (GendersDataResponse);
+}
+
+// =====================================================================
+// GET ALL Payment Service
+// =====================================================================
+
+message PaymentRequest {
+    int32 user_id = 1;
+}
+
+message Payment {
+    int32 id = 1;
+    int32 user_id = 2;
+    int32 plan_id = 3;
+    int32 method_id = 4;
+    float total = 5;
+}
+
+message PaymentResponse {
+    repeated Payment payment = 1;
+}
+
+service PaymentService {
+    rpc GetPaymentData (PaymentRequest) returns (PaymentResponse);
+}
+
+
+// =====================================================================
+// GET ALL Plan Service
+// =====================================================================
+
+message PlanRequest {
+    int32 plan_id = 1;
+}
+
+message PlanResponse {
+    int32 id = 1;
+    string name = 2;
+    int32 value = 3;
+}
+
+service PlanService {
+    rpc GetPlanData (PlanRequest) returns (PlanResponse);
+}
+
+// =====================================================================
+// GET ALL Method Service
+// =====================================================================
+
+message MethodRequest {
+    int32 method_id = 1;
+}
+
+message MethodResponse {
+    int32 id = 1;
+    string name = 2;
+    float discount = 3; 
+}
+
+service MethodService { 
+    rpc GetMethodData (MethodRequest) returns (MethodResponse);
+}
