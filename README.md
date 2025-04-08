@@ -38,6 +38,9 @@ Este projeto tem como objetivo desenvolver um sistema completo que resolva esse 
 1. **Clone este repositório**
    ```bash
    git clone git@github.com:JacksonSanti/FitAdmin_gateway_api.git
-2. **Rodar o comando abaixo para subir este container (é necessário ter o docker instalado)**
+2. **Rodar o comando abaixo para instalar as dependências necessárias**
+   ```bash
+   pip install -r requirements.txt
+3. **Rodar o comando abaixo para subir este container (é necessário ter o docker instalado)**
    ```bash
    docker compose up -d
