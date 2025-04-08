@@ -111,6 +111,31 @@ class StudentServiceStub(object):
                 request_serializer=service__pb2.StudentDataRequest.SerializeToString,
                 response_deserializer=service__pb2.StudentDataResponse.FromString,
                 _registered_method=True)
+        self.UpdateStudentData = channel.unary_unary(
+                '/StudentService/UpdateStudentData',
+                request_serializer=service__pb2.StudentUpdateRequest.SerializeToString,
+                response_deserializer=service__pb2.StudentUpdateResponse.FromString,
+                _registered_method=True)
+        self.CreateStudentData = channel.unary_unary(
+                '/StudentService/CreateStudentData',
+                request_serializer=service__pb2.StudentCreateRequest.SerializeToString,
+                response_deserializer=service__pb2.StudentCreateResponse.FromString,
+                _registered_method=True)
+        self.UpdateStudentPaymentId = channel.unary_unary(
+                '/StudentService/UpdateStudentPaymentId',
+                request_serializer=service__pb2.StudentUpdatePaymentIdRequest.SerializeToString,
+                response_deserializer=service__pb2.StudentUpdateResponse.FromString,
+                _registered_method=True)
+        self.DeleteStudentById = channel.unary_unary(
+                '/StudentService/DeleteStudentById',
+                request_serializer=service__pb2.StudentDeleteRequest.SerializeToString,
+                response_deserializer=service__pb2.StudentUpdateResponse.FromString,
+                _registered_method=True)
+        self.GetStudentByName = channel.unary_unary(
+                '/StudentService/GetStudentByName',
+                request_serializer=service__pb2.StudentSearchRequest.SerializeToString,
+                response_deserializer=service__pb2.StudentDataResponse.FromString,
+                _registered_method=True)
 
 
 class StudentServiceServicer(object):
@@ -122,12 +147,67 @@ class StudentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def UpdateStudentData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateStudentData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateStudentPaymentId(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteStudentById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetStudentByName(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_StudentServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetStudentData': grpc.unary_unary_rpc_method_handler(
                     servicer.GetStudentData,
                     request_deserializer=service__pb2.StudentDataRequest.FromString,
+                    response_serializer=service__pb2.StudentDataResponse.SerializeToString,
+            ),
+            'UpdateStudentData': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateStudentData,
+                    request_deserializer=service__pb2.StudentUpdateRequest.FromString,
+                    response_serializer=service__pb2.StudentUpdateResponse.SerializeToString,
+            ),
+            'CreateStudentData': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateStudentData,
+                    request_deserializer=service__pb2.StudentCreateRequest.FromString,
+                    response_serializer=service__pb2.StudentCreateResponse.SerializeToString,
+            ),
+            'UpdateStudentPaymentId': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateStudentPaymentId,
+                    request_deserializer=service__pb2.StudentUpdatePaymentIdRequest.FromString,
+                    response_serializer=service__pb2.StudentUpdateResponse.SerializeToString,
+            ),
+            'DeleteStudentById': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteStudentById,
+                    request_deserializer=service__pb2.StudentDeleteRequest.FromString,
+                    response_serializer=service__pb2.StudentUpdateResponse.SerializeToString,
+            ),
+            'GetStudentByName': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetStudentByName,
+                    request_deserializer=service__pb2.StudentSearchRequest.FromString,
                     response_serializer=service__pb2.StudentDataResponse.SerializeToString,
             ),
     }
@@ -168,6 +248,141 @@ class StudentService(object):
             metadata,
             _registered_method=True)
 
+    @staticmethod
+    def UpdateStudentData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StudentService/UpdateStudentData',
+            service__pb2.StudentUpdateRequest.SerializeToString,
+            service__pb2.StudentUpdateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateStudentData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StudentService/CreateStudentData',
+            service__pb2.StudentCreateRequest.SerializeToString,
+            service__pb2.StudentCreateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdateStudentPaymentId(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StudentService/UpdateStudentPaymentId',
+            service__pb2.StudentUpdatePaymentIdRequest.SerializeToString,
+            service__pb2.StudentUpdateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeleteStudentById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StudentService/DeleteStudentById',
+            service__pb2.StudentDeleteRequest.SerializeToString,
+            service__pb2.StudentUpdateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetStudentByName(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StudentService/GetStudentByName',
+            service__pb2.StudentSearchRequest.SerializeToString,
+            service__pb2.StudentDataResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
 
 class StateServiceStub(object):
     """Missing associated documentation comment in .proto file."""
@@ -181,7 +396,12 @@ class StateServiceStub(object):
         self.GetStateData = channel.unary_unary(
                 '/StateService/GetStateData',
                 request_serializer=service__pb2.StatesDataRequest.SerializeToString,
-                response_deserializer=service__pb2.StatesDataResponse.FromString,
+                response_deserializer=service__pb2.StatesListDataResponse.FromString,
+                _registered_method=True)
+        self.GetStateDataById = channel.unary_unary(
+                '/StateService/GetStateDataById',
+                request_serializer=service__pb2.StateDataRequestById.SerializeToString,
+                response_deserializer=service__pb2.StateResponse.FromString,
                 _registered_method=True)
 
 
@@ -194,13 +414,24 @@ class StateServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetStateDataById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_StateServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetStateData': grpc.unary_unary_rpc_method_handler(
                     servicer.GetStateData,
                     request_deserializer=service__pb2.StatesDataRequest.FromString,
-                    response_serializer=service__pb2.StatesDataResponse.SerializeToString,
+                    response_serializer=service__pb2.StatesListDataResponse.SerializeToString,
+            ),
+            'GetStateDataById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetStateDataById,
+                    request_deserializer=service__pb2.StateDataRequestById.FromString,
+                    response_serializer=service__pb2.StateResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -229,7 +460,34 @@ class StateService(object):
             target,
             '/StateService/GetStateData',
             service__pb2.StatesDataRequest.SerializeToString,
-            service__pb2.StatesDataResponse.FromString,
+            service__pb2.StatesListDataResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetStateDataById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/StateService/GetStateDataById',
+            service__pb2.StateDataRequestById.SerializeToString,
+            service__pb2.StateResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -253,7 +511,12 @@ class GenderServiceStub(object):
         self.GetGenderData = channel.unary_unary(
                 '/GenderService/GetGenderData',
                 request_serializer=service__pb2.GendersDataRequest.SerializeToString,
-                response_deserializer=service__pb2.GendersDataResponse.FromString,
+                response_deserializer=service__pb2.GenderListDataResponse.FromString,
+                _registered_method=True)
+        self.GetGenderDataById = channel.unary_unary(
+                '/GenderService/GetGenderDataById',
+                request_serializer=service__pb2.GendersDataRequestById.SerializeToString,
+                response_deserializer=service__pb2.GenderResponse.FromString,
                 _registered_method=True)
 
 
@@ -266,13 +529,24 @@ class GenderServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetGenderDataById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_GenderServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetGenderData': grpc.unary_unary_rpc_method_handler(
                     servicer.GetGenderData,
                     request_deserializer=service__pb2.GendersDataRequest.FromString,
-                    response_serializer=service__pb2.GendersDataResponse.SerializeToString,
+                    response_serializer=service__pb2.GenderListDataResponse.SerializeToString,
+            ),
+            'GetGenderDataById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetGenderDataById,
+                    request_deserializer=service__pb2.GendersDataRequestById.FromString,
+                    response_serializer=service__pb2.GenderResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -301,7 +575,34 @@ class GenderService(object):
             target,
             '/GenderService/GetGenderData',
             service__pb2.GendersDataRequest.SerializeToString,
-            service__pb2.GendersDataResponse.FromString,
+            service__pb2.GenderListDataResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetGenderDataById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/GenderService/GetGenderDataById',
+            service__pb2.GendersDataRequestById.SerializeToString,
+            service__pb2.GenderResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -325,7 +626,32 @@ class PaymentServiceStub(object):
         self.GetPaymentData = channel.unary_unary(
                 '/PaymentService/GetPaymentData',
                 request_serializer=service__pb2.PaymentRequest.SerializeToString,
+                response_deserializer=service__pb2.PaymentListResponse.FromString,
+                _registered_method=True)
+        self.GetPaymentDataById = channel.unary_unary(
+                '/PaymentService/GetPaymentDataById',
+                request_serializer=service__pb2.PaymentRequestById.SerializeToString,
                 response_deserializer=service__pb2.PaymentResponse.FromString,
+                _registered_method=True)
+        self.UpdatePaymentData = channel.unary_unary(
+                '/PaymentService/UpdatePaymentData',
+                request_serializer=service__pb2.PaymentUpdateRequest.SerializeToString,
+                response_deserializer=service__pb2.PaymentUpdateResponse.FromString,
+                _registered_method=True)
+        self.CreatePaymentData = channel.unary_unary(
+                '/PaymentService/CreatePaymentData',
+                request_serializer=service__pb2.PaymentCreateRequest.SerializeToString,
+                response_deserializer=service__pb2.PaymentCreateResponse.FromString,
+                _registered_method=True)
+        self.UpdatePaymentStudentId = channel.unary_unary(
+                '/PaymentService/UpdatePaymentStudentId',
+                request_serializer=service__pb2.PaymentUpdateStudentIdRequest.SerializeToString,
+                response_deserializer=service__pb2.PaymentUpdateResponse.FromString,
+                _registered_method=True)
+        self.DeletePaymentById = channel.unary_unary(
+                '/PaymentService/DeletePaymentById',
+                request_serializer=service__pb2.StudentDeleteRequest.SerializeToString,
+                response_deserializer=service__pb2.PaymentUpdateResponse.FromString,
                 _registered_method=True)
 
 
@@ -338,13 +664,68 @@ class PaymentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetPaymentDataById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdatePaymentData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreatePaymentData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdatePaymentStudentId(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeletePaymentById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PaymentServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetPaymentData': grpc.unary_unary_rpc_method_handler(
                     servicer.GetPaymentData,
                     request_deserializer=service__pb2.PaymentRequest.FromString,
+                    response_serializer=service__pb2.PaymentListResponse.SerializeToString,
+            ),
+            'GetPaymentDataById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPaymentDataById,
+                    request_deserializer=service__pb2.PaymentRequestById.FromString,
                     response_serializer=service__pb2.PaymentResponse.SerializeToString,
+            ),
+            'UpdatePaymentData': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdatePaymentData,
+                    request_deserializer=service__pb2.PaymentUpdateRequest.FromString,
+                    response_serializer=service__pb2.PaymentUpdateResponse.SerializeToString,
+            ),
+            'CreatePaymentData': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreatePaymentData,
+                    request_deserializer=service__pb2.PaymentCreateRequest.FromString,
+                    response_serializer=service__pb2.PaymentCreateResponse.SerializeToString,
+            ),
+            'UpdatePaymentStudentId': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdatePaymentStudentId,
+                    request_deserializer=service__pb2.PaymentUpdateStudentIdRequest.FromString,
+                    response_serializer=service__pb2.PaymentUpdateResponse.SerializeToString,
+            ),
+            'DeletePaymentById': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeletePaymentById,
+                    request_deserializer=service__pb2.StudentDeleteRequest.FromString,
+                    response_serializer=service__pb2.PaymentUpdateResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -373,7 +754,142 @@ class PaymentService(object):
             target,
             '/PaymentService/GetPaymentData',
             service__pb2.PaymentRequest.SerializeToString,
+            service__pb2.PaymentListResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetPaymentDataById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/PaymentService/GetPaymentDataById',
+            service__pb2.PaymentRequestById.SerializeToString,
             service__pb2.PaymentResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdatePaymentData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/PaymentService/UpdatePaymentData',
+            service__pb2.PaymentUpdateRequest.SerializeToString,
+            service__pb2.PaymentUpdateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreatePaymentData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/PaymentService/CreatePaymentData',
+            service__pb2.PaymentCreateRequest.SerializeToString,
+            service__pb2.PaymentCreateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UpdatePaymentStudentId(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/PaymentService/UpdatePaymentStudentId',
+            service__pb2.PaymentUpdateStudentIdRequest.SerializeToString,
+            service__pb2.PaymentUpdateResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def DeletePaymentById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/PaymentService/DeletePaymentById',
+            service__pb2.StudentDeleteRequest.SerializeToString,
+            service__pb2.PaymentUpdateResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -397,6 +913,11 @@ class PlanServiceStub(object):
         self.GetPlanData = channel.unary_unary(
                 '/PlanService/GetPlanData',
                 request_serializer=service__pb2.PlanRequest.SerializeToString,
+                response_deserializer=service__pb2.PlanListResponse.FromString,
+                _registered_method=True)
+        self.GetPlanDataById = channel.unary_unary(
+                '/PlanService/GetPlanDataById',
+                request_serializer=service__pb2.PlanRequestById.SerializeToString,
                 response_deserializer=service__pb2.PlanResponse.FromString,
                 _registered_method=True)
 
@@ -410,12 +931,23 @@ class PlanServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetPlanDataById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PlanServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetPlanData': grpc.unary_unary_rpc_method_handler(
                     servicer.GetPlanData,
                     request_deserializer=service__pb2.PlanRequest.FromString,
+                    response_serializer=service__pb2.PlanListResponse.SerializeToString,
+            ),
+            'GetPlanDataById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPlanDataById,
+                    request_deserializer=service__pb2.PlanRequestById.FromString,
                     response_serializer=service__pb2.PlanResponse.SerializeToString,
             ),
     }
@@ -445,6 +977,33 @@ class PlanService(object):
             target,
             '/PlanService/GetPlanData',
             service__pb2.PlanRequest.SerializeToString,
+            service__pb2.PlanListResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetPlanDataById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/PlanService/GetPlanDataById',
+            service__pb2.PlanRequestById.SerializeToString,
             service__pb2.PlanResponse.FromString,
             options,
             channel_credentials,
@@ -469,6 +1028,11 @@ class MethodServiceStub(object):
         self.GetMethodData = channel.unary_unary(
                 '/MethodService/GetMethodData',
                 request_serializer=service__pb2.MethodRequest.SerializeToString,
+                response_deserializer=service__pb2.MethodListResponse.FromString,
+                _registered_method=True)
+        self.GetMethodDataById = channel.unary_unary(
+                '/MethodService/GetMethodDataById',
+                request_serializer=service__pb2.MethodRequestById.SerializeToString,
                 response_deserializer=service__pb2.MethodResponse.FromString,
                 _registered_method=True)
 
@@ -482,12 +1046,23 @@ class MethodServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetMethodDataById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MethodServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetMethodData': grpc.unary_unary_rpc_method_handler(
                     servicer.GetMethodData,
                     request_deserializer=service__pb2.MethodRequest.FromString,
+                    response_serializer=service__pb2.MethodListResponse.SerializeToString,
+            ),
+            'GetMethodDataById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetMethodDataById,
+                    request_deserializer=service__pb2.MethodRequestById.FromString,
                     response_serializer=service__pb2.MethodResponse.SerializeToString,
             ),
     }
@@ -517,6 +1092,33 @@ class MethodService(object):
             target,
             '/MethodService/GetMethodData',
             service__pb2.MethodRequest.SerializeToString,
+            service__pb2.MethodListResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetMethodDataById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/MethodService/GetMethodDataById',
+            service__pb2.MethodRequestById.SerializeToString,
             service__pb2.MethodResponse.FromString,
             options,
             channel_credentials,

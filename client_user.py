@@ -2,6 +2,7 @@ import grpc
 import service_pb2
 import service_pb2_grpc
 import json
+from flask import jsonify
 from client_financial import *
 
 channel = grpc.insecure_channel("user_grpc:50051")
@@ -20,42 +21,37 @@ def authenticate_user(email, password):
         return False
 
 def get_student():
-
     try:
-
         stub = service_pb2_grpc.StudentServiceStub(channel)
 
         request = service_pb2.StudentDataRequest()
 
         response = stub.GetStudentData(request)
 
-        students_list = [
-            {
+        students_list = []
+
+        for student in response.student:
+            student_data = {
                 "id": student.id,
                 "name": student.name,
-                "gender_id": student.gender_id,
+                "gender": get_gender_by_id(student.gender_id),
                 "birthday": student.birthday,
                 "email": student.email,
                 "phone": student.phone,
-                "state_id": student.state_id,
+                "state": get_state_by_id(student.state_id),
                 "city": student.city,
                 "neighborhood": student.neighborhood,
                 "address": student.address,
                 "number": student.number,
-                "plan_id": student.plan_id,
-                "payment_id": student.payment_id,
+                "cep": student.cep,
+                "payment": get_payment_info(student.id)
             }
-            for student in response.student
-        ]
+            students_list.append(student_data)
 
-
-        json_data = json.dumps(students_list, indent=4) 
-    
-        return json_data 
+        return jsonify(students_list)
 
     except grpc.RpcError as e:
-
-        return {"error": f"Erro ao buscar estudantes: {e.details()}"}
+        return jsonify({"error": f"Erro ao buscar estudantes: {e}"})
 
 def get_state():
 
@@ -74,10 +70,7 @@ def get_state():
         for state in response.state  
     ]
 
-
-    json_data = json.dumps(states_list, indent=4)
-
-    return json_data
+    return states_list
 
 def get_gender():
 
@@ -95,8 +88,159 @@ def get_gender():
         for gender in response.gender
     ]
 
-    json_data = json.dumps(gender_list, indent=4)
+    return gender_list
 
-    return json_data
+def get_state_by_id(state_id):
+
+    stub = service_pb2_grpc.StateServiceStub(channel)
+
+    request = service_pb2.StateDataRequestById(state_id=int(state_id))
+
+    response = stub.GetStateDataById(request)
+
+    state_dict = {
+        "id" : response.id,
+        "name" : response.name,
+        "abbreviation" : response.abbreviation,
+    }
+
+    return state_dict
+
+def get_gender_by_id(gender_id):
+
+    stub = service_pb2_grpc.GenderServiceStub(channel)
+
+    request = service_pb2.GendersDataRequestById(gender_id=int(gender_id))
+
+    response = stub.GetGenderDataById(request)
+
+    gender_dict = {
+        "id" : response.id,
+        "name" : response.name,
+    }
+
+    return gender_dict
+
+def update_student(id,name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id):
+
+    stub = service_pb2_grpc.StudentServiceStub(channel)
+
+    request = service_pb2.StudentUpdateRequest(
+        id= id,
+        name = name,
+        gender_id = gender_id,
+        birthday = birthday,  
+        email = email,  
+        phone = phone,
+        state_id = state_id, 
+        city = city,  
+        neighborhood = neighborhood,
+        address = address,  
+        number = number,  
+        cep = cep,
+        payment_id = payment_id   
+    )
+
+    response = stub.UpdateStudentData(request)
+
+    response_dict = {
+        "status" : response.success
+    }
+
+    return response_dict
+
+def create_student(name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id):
+
+    stub = service_pb2_grpc.StudentServiceStub(channel)
+
+    request = service_pb2.StudentCreateRequest(
+        name = name,
+        gender_id = gender_id,
+        birthday = birthday,
+        email = email,
+        phone = phone,
+        state_id = state_id,
+        city = city,
+        neighborhood = neighborhood,
+        address = address,
+        number = number,
+        cep = cep,
+        payment_id = payment_id,
+    )
+
+    response = stub.CreateStudentData(request)
+
+    response_dict = {
+        "id" : response.id
+    }
+
+    return response_dict
+
+def update_financial_id_by_student_id(student_id, financial_id):
+
+    stub = service_pb2_grpc.StudentServiceStub(channel)
+
+    request = service_pb2.StudentUpdatePaymentIdRequest(
+        student_id = student_id,
+        financial_id = financial_id,
+    )
+
+    response = stub.UpdateStudentPaymentId(request)
+
+    response_dict = {
+        "success" : response.success
+    }
+
+    return response_dict
+
+def delete_student_by_id(student_id):
+
+    stub = service_pb2_grpc.StudentServiceStub(channel)
+
+    request = service_pb2.StudentDeleteRequest(
+        student_id = student_id,
+    )
+
+    response = stub.DeleteStudentById(request)
+
+    response_dict = {
+        "success" : response.success
+    }
+
+    return response_dict
+
+def get_student_by_name(name):
+
+    stub = service_pb2_grpc.StudentServiceStub(channel)
+
+    request = service_pb2.StudentSearchRequest(
+        student_name = name,
+    )
+
+    response = stub.GetStudentByName(request)
+
+    students_list = []
+
+    for student in response.student:
+        student_data = {
+            "id": student.id,
+            "name": student.name,
+            "gender": get_gender_by_id(student.gender_id),
+            "birthday": student.birthday,
+            "email": student.email,
+            "phone": student.phone,
+            "state": get_state_by_id(student.state_id),
+            "city": student.city,
+            "neighborhood": student.neighborhood,
+            "address": student.address,
+            "number": student.number,
+            "cep": student.cep,
+            "payment": get_payment_info(student.id)
+        }
+        students_list.append(student_data)
+
+    return jsonify(students_list)
+
+
 
 
