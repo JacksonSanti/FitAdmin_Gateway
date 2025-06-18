@@ -37,6 +37,8 @@ message StudentUpdateRequest {
     string number = 11;
     string cep = 12;
     int32 payment_id = 13;
+    int32 nivel_id = 14;
+    int32 goal_id = 15;
 }
 
 message StudentUpdatePaymentIdRequest {
@@ -45,18 +47,20 @@ message StudentUpdatePaymentIdRequest {
 }
 
 message StudentCreateRequest {
-    string name = 2;
-    int32 gender_id = 3;
-    string birthday = 4;
-    string email = 5;
-    string phone = 6;
-    int32 state_id = 7;
-    string city = 8;
-    string neighborhood = 9;
-    string address = 10;
-    string number = 11;
-    string cep = 12;
-    int32 payment_id = 13;
+    string name = 1;
+    int32 gender_id = 2;
+    string birthday =3;
+    string email = 4;
+    string phone = 5;
+    int32 state_id = 6;
+    string city = 7;
+    string neighborhood = 8;
+    string address = 9;
+    string number = 10;
+    string cep = 11;
+    int32 payment_id = 12;
+    int32 nivel_id = 13;
+    int32 goal_id = 14;
 }
 
 message StudentSearchRequest {
@@ -77,6 +81,8 @@ message Student {
     string number = 11;
     string cep = 12;
     string payment_id = 13;
+    string nivel_id = 14;
+    string goal_id = 15;
 }
 
 message StudentDeleteRequest {
@@ -261,4 +267,52 @@ message MethodListResponse {
 service MethodService { 
     rpc GetMethodData (MethodRequest) returns (MethodListResponse);
     rpc GetMethodDataById (MethodRequestById) returns (MethodResponse);
+}
+
+// =====================================================================
+// GET ALL Nivel Service
+// =====================================================================
+
+message NivelDataRequest{}
+
+message NivelDataRequestById{
+    int32 nivel_id = 1;
+}
+
+message NivelResponse {
+    int32 id = 1;
+    string name = 2;
+}
+
+message NivelListDataResponse {
+    repeated NivelResponse nivel = 1;
+}
+
+service NivelService {
+    rpc GetNivelData (NivelDataRequest) returns (NivelListDataResponse);
+    rpc GetNivelDataById (NivelDataRequestById) returns (NivelResponse);
+}
+
+// =====================================================================
+// GET ALL Goals Service
+// =====================================================================
+
+message GoalDataRequest{}
+
+message GoalDataRequestById{
+    int32 goal_id = 1;
+}
+
+message GoalResponse {
+    int32 id = 1;
+    string name = 2;
+}
+
+message GoalListDataResponse {
+    repeated GoalResponse goal = 1;
+}
+
+service GoalService {
+    rpc GetGoalsData (GoalDataRequest) returns (GoalListDataResponse);
+    rpc GetGoalDataById (GoalDataRequestById) returns (GoalResponse);
 }

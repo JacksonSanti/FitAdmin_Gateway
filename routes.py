@@ -1,60 +1,12 @@
-from flask import Blueprint,render_template
-from flask import request
-from flask import Response
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from redis_client import get_token_by_email, redis_connection, save_token
-import json
+from flask import Blueprint,request,send_file
+from flask_jwt_extended import create_access_token
+import requests
+from redis_client import get_token_by_email, save_token
 from client_user import *
 from client_financial import *
-from flask import jsonify
+from utils import *
 
 gateway = Blueprint('routes', __name__)
-
-def update_student_id_and_financial_id(student_id, financial_id):
-
-    student_status = update_financial_id_by_student_id(student_id, financial_id)
-
-    financial_status = update_student_id_by_financial_id(student_id, financial_id)
-
-    if financial_status["success"] and student_status["success"]:
-
-        data = { "status" : True }
-
-        return data 
-        
-    else:
-
-        data = { "status" : False }
-
-        return data
-
-def delete_student_id_and_payment_id(student_id, payment_id):
-
-    student_status = delete_student_by_id(student_id)
-
-    payment_status = delete_payment_by_id(payment_id)
-
-    if payment_status["success"] and student_status["success"]:
-
-        data = { "status" : True }
-
-        return data 
-        
-    else:
-
-        data = { "status" : False }
-
-        return data
-
-def general_response(json_data):
-    
-    return jsonify(json_data)  
-
-def check_token(email, token):
-
-    redis_token = get_token_by_email(email)
-
-    return token == redis_token
 
 @gateway.route('/authenticate', methods=['POST'])
 def authenticate():
@@ -104,6 +56,8 @@ def stutent():
 
         json = request.get_json()
 
+        print(json)
+
         id = int(json.get('id'))
         name = json.get('name')
         email = json.get('email')
@@ -119,8 +73,10 @@ def stutent():
         cep = json.get('cep')
         payment_id = int(json.get('payment'))
         method_id = int(json.get('method'))
+        nivel_id = int(json.get('nivel'))
+        goal_id = int(json.get('goal'))
 
-        student_id = create_student(name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id)  
+        student_id = create_student(name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id,nivel_id,goal_id)  
 
         financial_id = create_payment(id,plan,method_id)
 
@@ -216,9 +172,67 @@ def search():
 
     return data
 
+@gateway.route('/nivel', methods=['GET'])
+def nivel():
 
-    
+    data = get_nivel()
 
+    nivel_list = [
+        {
+            "id": item['id'],
+            "name": format_general_name(item['name']),
+        }
+        for item in data
+    ]
+
+    return general_response(nivel_list)
+
+@gateway.route('/goal', methods=['GET'])
+def goal():
+
+    data = get_goal()
+
+    goal_list = [
+    {
+        "id": item['id'],
+        "name": format_general_name(item['name']),
+    }
+    for item in data
+    ]
+
+    return general_response(goal_list)
+
+@gateway.route('/ai', methods=['POST'])
+def ai():
+
+    req_data = request.get_json()
+
+    plan = req_data.get('plan')
+    nivel = req_data.get('nivel')
+    goal = req_data.get('goal')
+    student = req_data.get('student')
+
+    response_from_ai_server = requests.post(
+        'http://ai_server:5002/fitai',
+        json={'plan': plan, 'nivel': nivel}
+    )
+
+    ai_data = response_from_ai_server.json()
+
+    unformat_plan = unformat_general_name(plan)
+
+    unformat_nivel = unformat_general_name(nivel)
+
+    unformat_goal = unformat_general_name(goal)
+
+    pdf_stream = generate_pdf_to_download(ai_data, student, unformat_plan, unformat_nivel, unformat_goal)
+
+    return send_file(
+        pdf_stream,
+        mimetype='application/pdf', 
+        as_attachment=True,
+        download_name=f'plano_de_treino_{student}.pdf' 
+    )
 
 
 

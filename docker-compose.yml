@@ -1,7 +1,6 @@
-version: '3.8'
-
 services:
   api:
+    container_name: gateway_api
     build: .
     ports:
       - "5001:5001"
@@ -14,6 +13,7 @@ services:
       - redis
 
   redis:
+    container_name: gateway_redis
     image: redis:latest
     ports:
       - "6379:6379"

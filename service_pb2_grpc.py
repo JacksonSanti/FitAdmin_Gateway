@@ -1129,3 +1129,233 @@ class MethodService(object):
             timeout,
             metadata,
             _registered_method=True)
+
+
+class NivelServiceStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.GetNivelData = channel.unary_unary(
+                '/NivelService/GetNivelData',
+                request_serializer=service__pb2.NivelDataRequest.SerializeToString,
+                response_deserializer=service__pb2.NivelListDataResponse.FromString,
+                _registered_method=True)
+        self.GetNivelDataById = channel.unary_unary(
+                '/NivelService/GetNivelDataById',
+                request_serializer=service__pb2.NivelDataRequestById.SerializeToString,
+                response_deserializer=service__pb2.NivelResponse.FromString,
+                _registered_method=True)
+
+
+class NivelServiceServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def GetNivelData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetNivelDataById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_NivelServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'GetNivelData': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNivelData,
+                    request_deserializer=service__pb2.NivelDataRequest.FromString,
+                    response_serializer=service__pb2.NivelListDataResponse.SerializeToString,
+            ),
+            'GetNivelDataById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNivelDataById,
+                    request_deserializer=service__pb2.NivelDataRequestById.FromString,
+                    response_serializer=service__pb2.NivelResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'NivelService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('NivelService', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class NivelService(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def GetNivelData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/NivelService/GetNivelData',
+            service__pb2.NivelDataRequest.SerializeToString,
+            service__pb2.NivelListDataResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetNivelDataById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/NivelService/GetNivelDataById',
+            service__pb2.NivelDataRequestById.SerializeToString,
+            service__pb2.NivelResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+
+class GoalServiceStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.GetGoalsData = channel.unary_unary(
+                '/GoalService/GetGoalsData',
+                request_serializer=service__pb2.GoalDataRequest.SerializeToString,
+                response_deserializer=service__pb2.GoalListDataResponse.FromString,
+                _registered_method=True)
+        self.GetGoalDataById = channel.unary_unary(
+                '/GoalService/GetGoalDataById',
+                request_serializer=service__pb2.GoalDataRequestById.SerializeToString,
+                response_deserializer=service__pb2.GoalResponse.FromString,
+                _registered_method=True)
+
+
+class GoalServiceServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def GetGoalsData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetGoalDataById(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_GoalServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'GetGoalsData': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetGoalsData,
+                    request_deserializer=service__pb2.GoalDataRequest.FromString,
+                    response_serializer=service__pb2.GoalListDataResponse.SerializeToString,
+            ),
+            'GetGoalDataById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetGoalDataById,
+                    request_deserializer=service__pb2.GoalDataRequestById.FromString,
+                    response_serializer=service__pb2.GoalResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'GoalService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+    server.add_registered_method_handlers('GoalService', rpc_method_handlers)
+
+
+ # This class is part of an EXPERIMENTAL API.
+class GoalService(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def GetGoalsData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/GoalService/GetGoalsData',
+            service__pb2.GoalDataRequest.SerializeToString,
+            service__pb2.GoalListDataResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetGoalDataById(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/GoalService/GetGoalDataById',
+            service__pb2.GoalDataRequestById.SerializeToString,
+            service__pb2.GoalResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>FIT ADMIN</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #444;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      color: #222;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #eaeaea;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Treino {{ student }}</h1>
+
+  <h3>Modalidade: {{ plan }}</h3>
+  <h3>Nivel: {{ nivel }}</h3>
+  <h3>Objetivo: {{ goal }}</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Exercicio</th>
+        <th>Repetição</th>
+        <th>Série</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for exercise in exercise.treino %} 
+      <tr>
+        <td>{{ exercise.exercicio }}</td>
+        <td>{{ exercise.series }}</td>
+        <td>{{ exercise.repeticoes }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h3>Data: {{ today }}</h3>
+
+</body>
+</html>

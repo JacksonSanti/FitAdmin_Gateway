@@ -1,9 +1,9 @@
 import grpc
 import service_pb2
 import service_pb2_grpc
-import json
 from flask import jsonify
 from client_financial import *
+from utils import *
 
 channel = grpc.insecure_channel("user_grpc:50051")
 
@@ -31,6 +31,7 @@ def get_student():
         students_list = []
 
         for student in response.student:
+        
             student_data = {
                 "id": student.id,
                 "name": student.name,
@@ -44,11 +45,14 @@ def get_student():
                 "address": student.address,
                 "number": student.number,
                 "cep": student.cep,
-                "payment": get_payment_info(student.id)
+                "payment": get_payment_info(student.payment_id),
+                "nivel": get_nivel_by_id(student.nivel_id),
+                "goal": get_goal_by_id(student.goal_id)
             }
             students_list.append(student_data)
 
         return jsonify(students_list)
+
 
     except grpc.RpcError as e:
         return jsonify({"error": f"Erro ao buscar estudantes: {e}"})
@@ -90,6 +94,42 @@ def get_gender():
 
     return gender_list
 
+def get_nivel():
+
+    stub = service_pb2_grpc.NivelServiceStub(channel)
+
+    request = service_pb2.NivelDataRequest()
+
+    response = stub.GetNivelData(request)
+
+    nivel_list = [
+        {
+            "id" : nivel.id,
+            "name": nivel.name,
+        }
+        for nivel in response.nivel
+    ]
+
+    return nivel_list
+
+def get_goal():
+    
+    stub = service_pb2_grpc.GoalServiceStub(channel)
+
+    request = service_pb2.GoalDataRequest()
+
+    response = stub.GetGoalsData(request)
+
+    goal_list = [
+        {
+            "id": goal.id,
+            "name": goal.name,
+        }
+        for goal in response.goal
+    ]
+
+    return goal_list
+
 def get_state_by_id(state_id):
 
     stub = service_pb2_grpc.StateServiceStub(channel)
@@ -121,7 +161,37 @@ def get_gender_by_id(gender_id):
 
     return gender_dict
 
-def update_student(id,name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id):
+def get_nivel_by_id(nivel_id):
+
+    stub = service_pb2_grpc.NivelServiceStub(channel)
+
+    request = service_pb2.NivelDataRequestById(nivel_id=int(nivel_id))
+
+    response = stub.GetNivelDataById(request)
+
+    nivel_dict = {
+        "id" : response.id,
+        "name" : format_general_name(response.name),
+    }
+
+    return nivel_dict
+
+def get_goal_by_id(goal_id):
+
+    stub = service_pb2_grpc.GoalServiceStub(channel)
+
+    request = service_pb2.GoalDataRequestById(goal_id=int(goal_id))
+
+    response = stub.GetGoalDataById(request)
+
+    goal_dict = {
+        "id" : response.id,
+        "name" : response.name,
+    }
+
+    return goal_dict
+
+def update_student(id,name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id,nivel_id,goal_id):
 
     stub = service_pb2_grpc.StudentServiceStub(channel)
 
@@ -138,7 +208,9 @@ def update_student(id,name,gender_id,birthday,email,phone,state_id,city,neighbor
         address = address,  
         number = number,  
         cep = cep,
-        payment_id = payment_id   
+        payment_id = payment_id,
+        nivel_id = nivel_id,
+        goal_id = goal_id
     )
 
     response = stub.UpdateStudentData(request)
@@ -149,10 +221,10 @@ def update_student(id,name,gender_id,birthday,email,phone,state_id,city,neighbor
 
     return response_dict
 
-def create_student(name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id):
+def create_student(name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id,nivel_id,goal_id):
 
     stub = service_pb2_grpc.StudentServiceStub(channel)
-
+    
     request = service_pb2.StudentCreateRequest(
         name = name,
         gender_id = gender_id,
@@ -166,6 +238,8 @@ def create_student(name,gender_id,birthday,email,phone,state_id,city,neighborhoo
         number = number,
         cep = cep,
         payment_id = payment_id,
+        nivel_id = nivel_id,
+        goal_id = goal_id
     )
 
     response = stub.CreateStudentData(request)
@@ -235,7 +309,8 @@ def get_student_by_name(name):
             "address": student.address,
             "number": student.number,
             "cep": student.cep,
-            "payment": get_payment_info(student.id)
+            "payment": get_payment_info(student.id),
+            "nivel": get_nivel_by_id(student.nivel_id)
         }
         students_list.append(student_data)
 

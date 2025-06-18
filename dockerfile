@@ -1,17 +1,22 @@
-# Usa uma imagem leve do Python
 FROM python:3.9-slim
 
-# Define o diretório de trabalho dentro do container
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        libgirepository1.0-dev \
+        libcairo2 \
+        libpango-1.0-0 \
+        libpangocairo-1.0-0 \
+        libgdk-pixbuf2.0-0 \
+        libffi-dev \
+        shared-mime-info \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /gateway
 
-# Copia apenas o arquivo de dependências para otimizar o cache
 COPY requirements.txt /gateway/
 
-# Instala as dependências
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expõe a porta do Flask
 EXPOSE 5001
 
-# Define o comando para rodar o app
 CMD ["python", "run.py"]
