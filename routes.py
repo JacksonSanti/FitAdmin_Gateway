@@ -104,8 +104,11 @@ def stutent():
         cep = json.get('cep')
         payment_id = int(json.get('payment'))
         method_id = int(json.get('method'))
+        nivel_id = int(json.get('nivel'))
+        goal_id = int(json.get('goal'))
 
-        student_status = update_student(id,name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id)
+
+        student_status = update_student(id,name,gender_id,birthday,email,phone,state_id,city,neighborhood,address,number,cep,payment_id,nivel_id,goal_id)
 
         payment_status = update_payment(payment_id,id,plan,method_id)
 

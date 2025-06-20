@@ -1,4 +1,4 @@
-# FitAdmin (Gateway API)
+# FitAdmin (Gateway)
 
 ## Introdução
 
@@ -37,7 +37,7 @@ Este projeto tem como objetivo desenvolver um sistema completo que resolva esse 
 
 1. **Clone este repositório**
    ```bash
-   git clone git@github.com:JacksonSanti/FitAdmin_gateway_api.git
+   git clone git@github.com:JacksonSanti/FitAdmin_Gateway.git
 2. **Após criar o ambiente virtual,instale as dependências necessárias**
    ```bash
    pip install -r requirements.txt

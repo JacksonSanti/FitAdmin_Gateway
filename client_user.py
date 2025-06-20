@@ -7,6 +7,42 @@ from utils import *
 
 channel = grpc.insecure_channel("user_grpc:50051")
 
+def update_student_id_and_financial_id(student_id, financial_id):
+
+    student_status = update_financial_id_by_student_id(student_id, financial_id)
+
+    financial_status = update_student_id_by_financial_id(student_id, financial_id)
+
+    if financial_status["success"] and student_status["success"]:
+
+        data = { "status" : True }
+
+        return data 
+        
+    else:
+
+        data = { "status" : False }
+
+        return data
+
+def delete_student_id_and_payment_id(student_id, payment_id):
+
+    student_status = delete_student_by_id(student_id)
+
+    payment_status = delete_payment_by_id(payment_id)
+
+    if payment_status["success"] and student_status["success"]:
+
+        data = { "status" : True }
+
+        return data 
+        
+    else:
+
+        data = { "status" : False }
+
+        return data
+
 def authenticate_user(email, password):
     
     stub = service_pb2_grpc.AuthServiceStub(channel)

@@ -6,42 +6,6 @@ from weasyprint import HTML
 from io import BytesIO
 from datetime import datetime
 
-def update_student_id_and_financial_id(student_id, financial_id):
-
-    student_status = update_financial_id_by_student_id(student_id, financial_id)
-
-    financial_status = update_student_id_by_financial_id(student_id, financial_id)
-
-    if financial_status["success"] and student_status["success"]:
-
-        data = { "status" : True }
-
-        return data 
-        
-    else:
-
-        data = { "status" : False }
-
-        return data
-
-def delete_student_id_and_payment_id(student_id, payment_id):
-
-    student_status = delete_student_by_id(student_id)
-
-    payment_status = delete_payment_by_id(payment_id)
-
-    if payment_status["success"] and student_status["success"]:
-
-        data = { "status" : True }
-
-        return data 
-        
-    else:
-
-        data = { "status" : False }
-
-        return data
-
 def general_response(json_data):
     
     return jsonify(json_data)  
