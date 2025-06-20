@@ -5,6 +5,7 @@ from jinja2 import Template
 from weasyprint import HTML
 from io import BytesIO
 from datetime import datetime
+import os
 
 def general_response(json_data):
     
@@ -88,13 +89,16 @@ def generate_pdf_to_download(ai_data: dict, name, plan, nivel, goal):
 
     today = date_now.strftime("%d/%m/%Y")
 
+    background_path = os.path.abspath("static/background.jpg").replace('\\', '/')
+
     data = {
         "exercise": ai_data,
         "student": name,
         "plan": plan,
         "nivel": nivel,
         "goal": goal,
-        "today": today
+        "today": today,
+        "background_image": f"file:///{background_path}"
     }
 
     html_output = template.render(data) 

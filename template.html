@@ -4,14 +4,22 @@
   <meta charset="UTF-8">
   <title>FIT ADMIN</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f9f9f9;
-      color: #333;
+    
+    @page {
+    size: A4;
+    margin: 0;
     }
 
-    h1 {
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      background-image: url("{{background_image}}"); 
+      background-size: cover; 
+      background-position: center; 
+      background-repeat: no-repeat; 
+    }
+
+    h1, h3 {
       text-align: center;
       color: #444;
     }
@@ -23,53 +31,57 @@
     }
 
     th, td {
-      border: 1px solid #ddd;
+      border: 0 solid  rgba(255, 255, 255, 0.3);
       padding: 12px;
       text-align: left;
     }
 
     th {
-      background-color: #f0f0f0;
+      background-color:  rgba(255, 255, 255, 0.3);
       color: #222;
     }
 
     tr:nth-child(even) {
-      background-color: #f9f9f9;
+      background-color:  rgba(255, 255, 255, 0.3);
     }
 
     tr:hover {
-      background-color: #eaeaea;
+      background-color:  rgba(255, 255, 255, 0.3);
+    }
+
+    .color_general {
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <h1>Treino {{ student }}</h1>
-
-  <h3>Modalidade: {{ plan }}</h3>
-  <h3>Nivel: {{ nivel }}</h3>
-  <h3>Objetivo: {{ goal }}</h3>
+  <h1 class="color_general">Treino {{ student }}</h1>
+  
+  <h3 class="color_general">Modalidade: {{ plan }}</h3>
+  <h3 class="color_general">Nivel: {{ nivel }}</h3>
+  <h3 class="color_general">Objetivo: {{ goal }}</h3>
 
   <table>
     <thead>
       <tr>
-        <th>Exercicio</th>
-        <th>Repetição</th>
-        <th>Série</th>
+        <th class="color_general">Exercicio</th>
+        <th class="color_general">Repetição</th>
+        <th class="color_general">Série</th>
       </tr>
     </thead>
     <tbody>
       {% for exercise in exercise.treino %} 
       <tr>
-        <td>{{ exercise.exercicio }}</td>
-        <td>{{ exercise.series }}</td>
-        <td>{{ exercise.repeticoes }}</td>
+        <td class="color_general">{{ exercise.exercicio }}</td>
+        <td class="color_general">{{ exercise.series }}</td>
+        <td class="color_general">{{ exercise.repeticoes }}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 
-  <h3>Data: {{ today }}</h3>
+  <h3 class="color_general">Data: {{ today }}</h3>
 
 </body>
 </html>
