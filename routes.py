@@ -171,6 +171,8 @@ def search():
 
     name = json.get('name')
 
+    print(name)
+
     data = get_student_by_name(name)
 
     return data
@@ -200,6 +202,7 @@ def goal():
         "id": item['id'],
         "name": format_general_name(item['name']),
     }
+    
     for item in data
     ]
 

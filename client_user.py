@@ -346,7 +346,8 @@ def get_student_by_name(name):
             "number": student.number,
             "cep": student.cep,
             "payment": get_payment_info(student.id),
-            "nivel": get_nivel_by_id(student.nivel_id)
+            "nivel": get_nivel_by_id(student.nivel_id),
+            "goal": get_goal_by_id(student.goal_id)
         }
         students_list.append(student_data)
 
